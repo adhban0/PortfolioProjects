@@ -121,3 +121,68 @@ where row_num > 1
 
 alter table NashvilleHousing
 drop column propertyaddress, owneraddress, saledate, taxdistrict
+
+-- Replace Null Values
+
+Update NashvilleHousing
+set OwnerName =  coalesce(OwnerName, 'City of Nashville')
+
+-- Convert all text to uppercase
+
+Update NashvilleHousing
+set LandUse = UPPER(landuse)
+
+Update NashvilleHousing
+set SoldAsVacant = UPPER(soldasvacant) 
+
+Update NashvilleHousing
+set OwnerName = UPPER(OwnerName)
+
+Update NashvilleHousing
+set PropertySplitAddress = UPPER(PropertySplitAddress)
+
+Update NashvilleHousing
+set PropertySplitCity = UPPER(PropertySplitCity)
+
+Update NashvilleHousing
+set OwnerSplitAddress = UPPER(OwnerSplitAddress)
+
+Update NashvilleHousing
+set OwnerSplitCity = UPPER(OwnerSplitCity)
+
+Update NashvilleHousing
+set OwnerSplitState = UPPER(OwnerSplitState)
+
+-- Finding outliers
+/* delete from table_name 
+ where (column_name) > upper_limit or (column_name) < lower_limit */
+
+ -- Remove Spaces
+ Update NashvilleHousing
+set LandUse = trim(landuse)
+
+Update NashvilleHousing
+set SoldAsVacant = trim(soldasvacant) 
+
+Update NashvilleHousing
+set OwnerName = trim(OwnerName)
+
+Update NashvilleHousing
+set PropertySplitAddress = trim(PropertySplitAddress)
+
+Update NashvilleHousing
+set PropertySplitCity = trim(PropertySplitCity)
+
+Update NashvilleHousing
+set OwnerSplitAddress = trim(OwnerSplitAddress)
+
+Update NashvilleHousing
+set OwnerSplitCity = trim(OwnerSplitCity)
+
+Update NashvilleHousing
+set OwnerSplitState = trim(OwnerSplitState)
+
+-- Delete Null rows
+
+delete from NashvilleHousing
+where [UniqueID ] is null
