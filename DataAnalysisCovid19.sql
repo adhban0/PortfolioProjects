@@ -1,8 +1,18 @@
-Select location, date, total_cases, new_cases, total_deaths, population
-from CovidDeaths$
-where continent is not null
-order by 1,2
+-- Creating indexes
+create clustered index IX_COVIDDEATHS_DEPARTMENT
+on CovidDeaths$ (location)
 
+create NONclustered index IX_COVIDDEATHS_date
+on CovidDeaths$ (date)
+
+create NONclustered index IX_COVIDDEATHS_continent
+on CovidDeaths$ (continent)
+
+create clustered index IX_CovidVaccinations$_DEPARTMENT
+on CovidVaccinations$ (location)
+
+create NONclustered index IX_CovidVaccinations$_date
+on CovidVaccinations$ (date)
 -- Looking at total cases vs total deaths
 -- Shows likelihood of dying if you contract covid in your country at a certain point in time
 Select location, date, total_cases, total_deaths, (total_deaths/total_cases)*100 as DeathPercentage

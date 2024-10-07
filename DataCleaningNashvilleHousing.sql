@@ -77,7 +77,7 @@ set OwnerSplitState = PARSENAME(replace(owneraddress,',','.'),1)
 select * from NashvilleHousing
 
 
---Change Y and N to Yes and No or vice versa (depending on which is more)
+--Inconsistent data formats (Change Y and N to Yes and No or vice versa (depending on which is more))
 
 select SoldAsVacant, COUNT(SoldAsVacant)
 from NashvilleHousing
@@ -186,3 +186,19 @@ set OwnerSplitState = trim(OwnerSplitState)
 
 delete from NashvilleHousing
 where [UniqueID ] is null
+
+-- Ensure proper data types
+update NashvilleHousing
+set [UniqueID ] = CAST([UniqueID ] as int)
+
+update NashvilleHousing
+set YearBuilt= CAST(YearBuilt as int)
+
+update NashvilleHousing
+set Bedrooms= CAST(bedrooms as int)
+
+update NashvilleHousing
+set FullBath = CAST(FullBath as int)
+
+update NashvilleHousing
+set HalfBath = CAST(HalfBath as int)
