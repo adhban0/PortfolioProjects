@@ -41,7 +41,7 @@ order by Education
 
 -- Gender Diversity in Departments: Males are notably more than females
 select Department, Gender,
-round(cast(count(*)*100.0/sum(count(*)) over (partition by department) as decimal(5,2)),2) as [Percentage]
+cast(count(*)*100.0/sum(count(*)) over (partition by department) as decimal(5,2)) as [Percentage]
 from [HR-Employee-Attrition]
 group by Department, Gender
 order by Department,[Percentage] DESC
@@ -49,7 +49,7 @@ order by Department,[Percentage] DESC
 -- Education fields Distribuition by Department: Life sciences (49.05%), Human resources (45%) and Marketing (36%) are the most popular education fields for R&D, HR and Sales departments, respectively.
 with education_field_cte as(
 select Department, EducationField,
-round(cast(count(*)*100.0/sum(count(*)) over (partition by department) as decimal(5,2)),2) as [Percentage]
+cast(count(*)*100.0/sum(count(*)) over (partition by department) as decimal(5,2)) as [Percentage]
 from [HR-Employee-Attrition]
 where EducationField != 'OTHER'
 group by Department, EducationField
